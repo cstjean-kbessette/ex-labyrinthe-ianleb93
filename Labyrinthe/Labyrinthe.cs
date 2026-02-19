@@ -2,7 +2,10 @@
 {
     internal class Labyrinthe
     {
-        public char[,] Map { get; set; } = new char[,]
+        public int PosX {  get; set; }
+        public int PosY { get; set; }
+
+        public  char[,] Map { get; set; } = new char[,]
         {
             { '█','█','█','█','█','█','█','█','█','█','█','█','█','█','█','█','█','█','█','█' },
             { '█',' ',' ',' ','█',' ',' ',' ',' ',' ','█',' ',' ',' ',' ',' ','█',' ',' ','█' },
@@ -25,6 +28,41 @@
             { '█','█','█','█',' ','█','█','█',' ','█','█','█','█','█',' ','█','█','█',' ','█' },
             { '█','█','█','█','█','█','█','█','█','█','█','█','█','█','█','█','█','█','█','█' }
         };
+
+        public Labyrinthe()
+        {
+            PosX = 1;
+            PosY = 1;
+        }
+
+        public void MoveUp()
+        {
+            if(CanMove(PosX -1, PosY))
+                PosX -= 1;
+        }
+        public void MoveDown() { 
+            if(CanMove(PosX +1, PosY))
+                PosX += 1;
+        }
+        public void MoveLeft() {
+            if (CanMove(PosX, PosY -1))
+                PosY -= 1;
+        }
+        public void MoveRight() {
+            if (CanMove(PosX, PosY +1))
+                PosY += 1;
+        }
+
+        public bool IsExit()
+        {
+            return Map[PosX, PosY] == 'E';
+
+        }
+
+        private bool CanMove(int x, int y)
+        {
+            return Map[x, y] != '█';
+        }
 
 
     }
